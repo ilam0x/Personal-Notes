@@ -1,0 +1,169 @@
+# JS basic-函数
+
+## 函数
+
+### 定义函数
+
+| DOM  | 通过js来访问和操纵html文档对象的标准方法                     |
+| :--- | ------------------------------------------------------------ |
+| let  | 用来声明局部变量,只在代码块内有效                            |
+| Var  | 形参就是在函数内部声明不赋值的变量，  调用函数时，多于实参不会被赋值，少于则undefined |
+|      |                                                              |
+
+函数是一个对象，可以封装功能，在需要的时候调用执行，可以将要封装的代码以字符串的形式传递给构造函数，不会立即执行
+
+**函数声明**
+
+```js
+Function fun(){
+    return
+}
+```
+
+**函数表达式**
+
+```js
+ var obj = new Object(); //定义对象
+	obj.name = "";
+	obj.age = ""; //定义属性
+	
+	obj.sayName() = funtion(){
+		console.log(obj.name);
+	}; //对象的属性可以是函数 → 方法
+	
+console.log(obj.sayName);
+obj.sayName();
+```
+
+ 
+
+| Break    | 退出当前的循环                                   |
+| -------- | ------------------------------------------------ |
+| continue | 跳过当次的循环                                   |
+| return   | 结束整个函数，任意数据类型，对象（也可以是函数） |
+
+ 
+
+**立即执行函数**
+
+```javascript
+(function(){ alert();}) ();
+```
+
+ `arguments`代表传递进来的所有参数，数组
+
+`rest`ES6新特性，获取出来已定义的参数之外的所有
+
+```javascript
+var obs = function(x...rest){
+    
+    console.log("x=>"+x);
+    
+    for (var i = 0; i<arguments.length; i++){
+        console.log(arguments[i]);
+    }
+    
+}
+```
+
+## 变量作用域
+
+函数查找变量从自身函数开始，由内向外，假设外部存在这个同名的函数变量，则内部会屏蔽外部的
+
+**提升变量作用域**
+
+全局变量都会自动绑定在window对象下
+
+```javascript
+x = "asd"
+alert(x);
+alert(window.x);
+window.alert(x);
+var old_alert = window.alert;
+```
+
+> 规范
+
+由于全局变量都会自动绑定在window对象下，不用的js文件使用相同的全局变量会产生冲突，所以把自己的代码放入定义的唯一空间命名中
+
+```javascript
+//唯一全局变量
+var ilam0x = {}:
+//定义全局变量
+ilam0x.name = 'ilam0x':
+ilam0x.function = function(a,b){
+    return a + b;
+}
+```
+
+> 局部作用域
+
+```javascript
+function scope_var(){
+    for (var i = 0; i<100; i++){
+        console.log(i)
+    }
+    console.log(i+1); //可以继续使用
+}
+
+function scope_let(){
+    for (let i = 0; i<100; i++){
+        console.log(i)
+    }
+    console.log(i+1); //i is not defined
+}
+```
+
+> 常量
+
+```javascript
+  const app = {
+    mounted() {
+      const _this = this.methods
+      setTimeout(() => {
+        _this.setLines()
+      }, 0) 
+      _this.setFontSize()
+      _this.dialog()
+      window.onresize = () => {
+        _this.setFontSize()
+        _this.setLines()
+     }
+    },
+    methods: {
+      setLines() {
+      },
+```
+
+> 方法
+
+```javascript
+var ilam = {
+    birth:'1999',
+    age: method(){
+    	var now = new Date().getFullYear();
+        return now=this.birth
+    }
+}
+//属性
+ilam.name
+//方法
+ilam.age()
+```
+
+### this
+
+```javascript
+```
+
+### jQuery
+
+`$(select).action()`
+
+```javascript
+document.getElementById('id'); //css选择器
+$('#a').click(function() {
+	alert('hello, jquery')
+}) //jquery 选择器
+```
+
