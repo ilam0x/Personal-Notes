@@ -135,22 +135,51 @@ class Solution:
 
 
 
+## 283. Move Zeroes
 
+```python
+#slow
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        right = len(nums)
+        if 0 in nums:
+            for i in range(right):
+                nums.remove(0)
+                nums.append(0)
+                right -= 1
+```
 
-# 二叉树
+## 167.Two Sum II - Input array is sorted
 
-## 基础
+没用双指针的方法
 
-| 概念 | 解释                |
-| ---- | ------------------- |
-| 子树 | 头节点+所有后续节点 |
-|      |                     |
+![image-20210826015620514](C:\Users\User\AppData\Roaming\Typora\typora-user-images\image-20210826015620514.png)
 
+```python
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        for a in range(len(numbers)):
+            b = target-numbers[a]
+            if b in numbers[a+1:]:
+                return [a+1,numbers.index(b,a+1)+1]
 
+```
 
-先序 头左右 
+双指针
 
-中序 左头右
-
-后序 左右头
+```python
+left = 0
+right = len(numbers)-1
+while (left < right):
+    sum = numbers[left]+numbers[right]
+    if (sum == target):
+        retun [left+1,right+1]
+    elif (sum < target):
+        left+=1
+    elif:
+        right-=1
+```
 

@@ -10,7 +10,9 @@ cmd 更换路径
 clip < ~/.ssh/id_ed25519.pub
 ```
 
-# upload
+# upload - 
+
+> init - remote add - add . - commit - (pull) - push
 
 `git init`
 

@@ -590,7 +590,7 @@ makeServerRequest.catch(error => {
 });
 ```
 
-# 算法与数据结构
+# Regular Expression
 
 ## 正则
 
@@ -672,10 +672,98 @@ let reRegex = /^(\d+) \1 \1 \1$/; //标记起始和结束
 > let result = str.replace(fixRegex, replaceText);
 > ```
 
-`String.prototype.trim()`
+去除空格
+
+等效`String.prototype.trim()`
 
 ```js
 let hello = "   Hello, World!  ";
 let wsRegex = /^(\s+)(.+[^\s])(\s+)$/;
 let result = hello.replace(wsRegex, '$2');
 ```
+
+# Debugging
+
+`console.log()`
+
+`console.clear()`
+
+`typeof ""`
+
+JavaScript recognizes six primitive (immutable) data types: `Boolean`, `Null`, `Undefined`, `Number`, `String`, and `Symbol` (new with ES6) and one type for mutable items: `Object`. Note that in JavaScript, arrays are technically a type of object.
+
+## 常见错误
+
+1. 找拼写错误
+2. 未关闭的括号（列表，函数...）
+3. 引号内使用相同的引号
+4. 等号和赋值
+5. 无参数的函数调用没带（）
+6. 参数调用顺序，
+7. 循环条件里：索引错误导致错误关闭Off by one errors (OBOE)，
+8. 循环初始变量
+9. 使用终止条件防止无限循环
+
+# basic data structure
+
+1. 定义 ` let arr = [1,a,true,'s',{}]`
+
+2. 索引访问 `arr[1]`
+
+3. 添加 `前：arr.unshift` `后：arr.push`
+
+4. 删除 `前: arr.shift` `后：arr.pop()`
+
+5. 切片 `arr.splice(2,2)`
+
+   ```js
+   const arr = [2, 4, 5, 1, 7, 5, 2, 1];
+   // Only change code below this line
+   arr.splice(0,1)+arr.splice(3)
+   // Only change code above this line
+   console.log(arr);
+   ```
+
+   添加 `splice(startIndex, amountTodelete,replacingValue)` //第二个参数是数量不是截止index
+
+   复制 slice(起始，不包含的结束)
+
+   **ES6 `spread operator` : [...arr];**
+
+   ```js
+   //添加列表 
+   newArr = newArr.push([...arr]); //TypeError: newArr.push is not a function
+   newArr.push([...arr]);//&直接改原来的列表
+   
+   //合并列表
+   [1,2,3,...arr]
+   ```
+
+6. `indexOf()` 获取元素下标，不存在返回 -1
+
+7. 列表循环遍历
+
+   1. `every()`
+
+   2. `forEach()`
+
+   3. `map()`
+
+   4. ```js
+      function filteredArray(arr, elem) {
+        let newArr = [];
+        for (let i = 0; i<arr.length; i++) {
+          if (arr[i].indexOf(elem) < 0) {
+            newArr.push(arr[i]); //&直接操作列表不赋值
+          }
+        }
+        return newArr;
+      }
+      ```
+
+8. 嵌套列表 ` ['unshift',['deep',['deeper',['deepest']]],false, 1, 2, 3, 'complex', 'nested'], `
+9. 给JS对象添加键值对
+   1. obj.attr = 'value';
+   2. obj['attr name'] = 'value'; //有空格的名称或者变量
+   3. 嵌套对象
+   4. 

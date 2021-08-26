@@ -1,4 +1,4 @@
-Complex Number Multiplication
+# Complex Number Multiplication
 
 ```python
 class Solution:
@@ -15,5 +15,31 @@ class Solution:
         return x1,x2,y1,y2
 #        return mul
         
+```
+
+# Sum of Square Numbers
+
+Given a non-negative integer `c`, decide whether there're two integers `a` and `b` such that `a2 + b2 = c`.
+
+```python
+import math
+class Solution:
+    def judgeSquareSum(self, c: int) -> bool:
+        
+        left = 0
+        right = int(math.sqrt(c))
+
+        while left <= right:
+            sqrt_sum = left**2 + right **2
+            if (sqrt_sum == c):
+                return True
+            else:
+                if (sqrt_sum < c):
+                    left +=1
+                else:
+                    right-=1
+        return False
+            
+
 ```
 
