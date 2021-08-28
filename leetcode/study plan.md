@@ -183,3 +183,48 @@ while (left < right):
         right-=1
 ```
 
+## 334. Reverse String
+
+直接修改原列表
+
+```python
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        left,right =0, len(s)-1
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left +=1
+            right -=1
+```
+
+## 557. Reverse Words in a String III
+
+```python 
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        temp = s.split()
+        a=0
+        l = []
+        while a < len(temp):
+            r = ''.join(i for i in reversed(temp[a]))
+            l.append(r)
+            a +=1
+        return ' '.join(l)
+
+```
+
+```
+Input: s = "Let's take LeetCode contest"
+Output: "s'teL ekat edoCteeL tsetnoc"
+```
+
+##### Python 97% Faster | One-liner
+
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return (" ".join([i[::-1] for i in s.split()]))
+```

@@ -27,7 +27,7 @@ function func(形参1，形参2){}
 function nextInLine(arr, item) {
   arr.push(item);
   return arr.shift();
-    //把数字添加到数组的结尾，然后移出数组的第一个元素。最后 nextInLine 函数应该返回被删除的元素。
+}    //把数字添加到数组的结尾，然后移出数组的第一个元素。最后 nextInLine 函数应该返回被删除的元素。
     
 相等运算符
 相对相等操作符 1 == '1' true
@@ -543,6 +543,8 @@ const myPromise = new Promise((resolve, reject) => {});
 
 //创建一个名为 `makeServerRequest` 的 promise。 给构造器函数传入 `resolve` 和 `reject` 两个参数。
 const makeServerRequest = new Promise((resolve,reject)) =>{}); //% `Promise` 是构造器函数
+
+
 ```
 
 ------
@@ -743,11 +745,14 @@ JavaScript recognizes six primitive (immutable) data types: `Boolean`, `Null`, `
 
 7. 列表循环遍历
 
-   1. `every()`
+   1. `every()` 检查每个数字是否符合条件
 
-   2. `forEach()`
+      - 不改变原始数组
+      - 
 
-   3. `map()`
+   2. `forEach()`接受函数作为参数，只用于数列且每个元素执行一次，返回undefined
+
+   3. `map()` 接受函数作为参数，并将每个元素映射的结果，返回新的列表
 
    4. ```js
       function filteredArray(arr, elem) {
@@ -762,8 +767,308 @@ JavaScript recognizes six primitive (immutable) data types: `Boolean`, `Null`, `
       ```
 
 8. 嵌套列表 ` ['unshift',['deep',['deeper',['deepest']]],false, 1, 2, 3, 'complex', 'nested'], `
+
 9. 给JS对象添加键值对
-   1. obj.attr = 'value';
-   2. obj['attr name'] = 'value'; //有空格的名称或者变量
-   3. 嵌套对象
-   4. 
+   1. `obj.prop = 'value';`
+   2. `obj['prop name'] = 'value';` //有空格的名称或者变量
+   3. `obj.prop.prop.prop = value ` 、//修改嵌套对象的值
+   4. ` delete obj.prop `  // 删除
+   
+10. 判断内有没有某种属性
+
+    - `obj.hasOwnProperty('propName');`
+
+    - `'propName' in obj`
+
+    - 判断多个
+
+      ```js
+      function isEveryoneHere(userObj){
+        let names = ['Alan','Jeff','Sarah','Ryan']
+        if (names.every(user => userObj.hasOwnProperty(user))){
+          return true
+        } //报错
+          
+      function isEveryoneHere(userObj){
+        return [
+          'Alan',
+          'Jeff',
+          'Sarah',
+          'Ryan'
+        ].every(user => userObj.hasOwnProperty(user));
+      }
+
+11. 用for循环根据对象关键字
+
+12. 根据输入的json判断属性种包含某种子属性的数量
+
+    ```js
+    function countOnline(usersObj) {
+      // Only change code below this line
+    let i=0;
+    for (let names in usersObj){
+      if (usersObj[names].online == true){
+        i +=1;
+      }
+    }
+    return i   // Only change code above this line
+    }
+    
+    //input
+    {
+      Alan: {
+        online: false
+      }
+    ```
+
+13. `Object.keys()`  列出对象所有属性
+
+# Basic algorithm Scripting
+
+1. 逆向输出 reverse str
+
+   ```js
+   let arr = str.split(""); //将string内按字母拆成数组
+   let r = arr.reverse().join("");//翻转，拼合
+   return r;
+   ```
+
+2. Return the factorial of the provided integer阶乘
+
+   ```js
+   function factorialize(num) {
+     let r = 1;
+     for (let i=1;i <= num; i++){
+      r = r * i;
+     }
+     return r;
+   }
+   
+   function factorialize(num) {
+     return num < 1 ? 1 : num * factorialize(num - 1);
+   }
+   
+   factorialize(5);
+   ```
+
+3. 获取字符串中最长单词长度
+
+   `.sort()` //&
+
+   没有传参的情况下按照0-9排序，也就是
+
+   > (10) [1, 10, 19, 2, 2, 2, 3, 4, 4, 4]
+
+   ```js
+   function findLongestWordLength(str) {
+     let arr = str.split(' ');
+     let arrNum = []
+     for ( let i=0;i<arr.length;i++){
+       arrNum.push(arr[i].length);  
+     }
+     arrNum.sort((a,b) => a-b);  
+     return arrNum.pop();
+   }
+   
+   function findLongestWordLength(str) {
+     return str.split(' ').sort((a, b) => b.length - a.length)[0].length;
+   }
+   ```
+
+4. **Return Largest Numbers in Arrays**
+
+   ```js
+   Math.max(data); //&Nah,需要换成下面的写法
+   Math.max.apply(Math, data);
+   //输出包含最大值的数组
+   function largestOfFour(arr) {
+     let arr2 = [...arr].flat(), max = Math.max.apply(Math,arr2)
+     for (var i=0; i<arr.length;i++){
+       if (arr[i].includes(max)){
+         return arr[i];
+       }
+     }
+   }
+   
+   //提取每个嵌套数组的最大值凑成新的数组
+   function largestOfFour(arr) {
+     let max = [];
+     for (var i=0; i<arr.length;i++){
+       max.push(Math.max.apply(Math,arr[i]))   
+       }
+     return max;
+     }
+   
+   function largestOfFour(arr) {
+     return arr.map(subArr => Math.max.apply(null, subArr));
+   }
+   ```
+
+5. `.endsWith()` 等效
+
+   `.substring(start,end*)`
+
+   ```js
+   function confirmEnding(str, target) {
+     if (str.substring(str.length-target.length) == target){
+     return true;
+     }else{
+       return false;
+     }
+   } // 只return布尔值的可以简写
+   
+    return str.substring(str.length - target.length) === target;
+   ```
+
+6. `.repeat()`
+
+   ```js
+   function repeatStringNumTimes(str, num) {
+     if (num>0){
+     return str + repeatStringNumTimes(str,num-1);}
+   }else{
+       return"";
+   }
+   repeatStringNumTimes("abc", 3);
+   //"abcabcabcundefined"
+   
+   function repeatStringNumTimes(str, num) {
+     if (num>0){
+     return str + repeatStringNumTimes(str,num-1);
+   } else {
+     return "";
+   }}
+   ```
+
+   
+
+7. Truncate a string
+
+   ```js
+   function truncateString(str, num) {
+     if (num >= str.length){
+       return str;
+     } else {
+     return str.substring(0,num)+"...";
+   }}
+   
+   truncateString("A-tisket a-tasket A green and yellow basket", "A-tisket a-tasket A green and yellow basket".length);
+   ```
+
+8. `.filter()` 根据filter的条件建立新的数组
+
+9. **Finders Keepers**，找偶数
+
+   ```js
+   function findElement(arr, func) {     
+     return arr.filter(func);
+   }
+   findElement([1, 2, 3, 4], num => num % 2 === 0);
+   //[2,4]
+   ```
+
+   
+
+10. 判断类型
+
+    ```js
+    function booWho(bool) {
+      return typeof(bool) === "boolean";
+    }
+    
+    booWho(null);
+    ```
+
+11. 首字母大写
+
+    ```js
+    function titleCase(str) {
+      return str.split(" ").map(item => item.substring(0,1).toUpperCase()+ item.substring(1).toLowerCase()).join(" ");
+    }
+    
+    titleCase("I'm a little tea pot");
+    ```
+
+12. Slice and splice
+
+    ```js
+    function frankenSplice(arr1, arr2, n) {
+      let a =arr2.slice(0,n); //把2拆分成两段和1拼接
+      let result = a.concat(arr1).concat(arr2.slice(n));
+      return result;
+    }
+    frankenSplice([1, 2, 3], [4, 5, 6], 1);
+    
+    function frankenSplice(arr1, arr2, n) {
+      // It's alive. It's alive!
+      let result = arr2.slice();//将arr2作为基准变换，把1插入数组
+      for (let i = 0; i < arr1.length; i++) {
+        result.splice(n+i, 0, arr1[i]);
+      }
+      return result;
+    }
+    ```
+
+13. Falsy Bouncer
+
+    ```js
+    arr.filter(Boolean);
+    
+    arr.filter(e=>e);
+    ```
+
+    
+
+14. Where do I belong
+
+    ```js
+    function getIndexToIns(arr, num) {
+      arr.push(num);
+      arr.sort((a,b)=>a-b);
+      return arr.indexOf(num);
+    }
+    getIndexToIns([40, 60], 50);
+    
+    function getIndexToIns(arr, num) {
+      arr.sort((a,b)=>a-b)
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] >= num) {
+          return i;
+        }}
+      return arr.length
+    }
+    
+    
+    getIndexToIns([40, 60], 50);
+    ```
+
+15. 匹配两个数组，是否包含
+
+    ```python
+    function mutation(arr) {
+      let a = arr[0].toLowerCase().split("");
+    
+      let b = arr[1].toLowerCase().split("");
+      let r = b.map(item=>a.includes(item));
+      if (r.includes(false)){
+        return false;
+      } else{
+        return true;
+      }
+    }
+    
+    mutation(["hello", "hey"]);
+    
+    function mutation(arr) {
+      let hash = Object.create(null);
+    
+      arr[0].toLowerCase().split('').forEach(c => hash[c] = true);
+    
+      return !arr[1].toLowerCase().split('').filter(c => !hash[c]).length;
+    }
+    
+    mutation(["hello", "hey"]);
+    ```
+
+    
+
